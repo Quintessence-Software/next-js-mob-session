@@ -1,6 +1,10 @@
+'use client'
+import { searchFilter } from '@/sharedUtil/searchFilter'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Link from 'next/link'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +20,27 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <div className='flex gap-1'>
+          <nav className='bg-yellow-500 h-screen w-1/6 flex flex-col'>
+            <Link href={'/'}>Home</Link>
+            <Link href={'/dashboard'}>Go to dashboard</Link>
+          </nav>
+          <main className='flex-grow h-screen'>
+            <header className='bg-blue-300 h-20'>
+              <label htmlFor='search-bar' className="block">
+                <span className="block text-sm font-medium text-slate-700">Search</span>
+                <input 
+                  onChange={searchFilter}
+                  type='text' id='search-bar'
+                  placeholder='input search query here' 
+                  className="border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"/>
+              </label>
+            </header>
+            {children}
+          </main>
+        </div>
+      </body>
     </html>
   )
 }
