@@ -1,12 +1,14 @@
-import { promises as fs } from 'fs';
+'use client';
+import { readJsonFile } from '@/sharedUtil/fileReader';
+import { useEffect, useState } from 'react';
 
-export default async function Dashboard () {
-    const readJsonFile = async (fileName: string) => {
-        const file = await fs.readFile(fileName, 'utf-8')
-        return file;
-    };
-    const data = await readJsonFile('C:/Dev/sandbox/nextjs/next-test-app/src/data/StockValues.json')
-    const dataCollection = JSON.parse(data);
+export default function Dashboard () {
+    const [dataCollection,setDataCollection] = useState([{}]);
+
+    useEffect(()=>{
+        setDataCollection(readJsonFile())
+    })
+
     return (
         <>
             <h1>Dashboard</h1>
