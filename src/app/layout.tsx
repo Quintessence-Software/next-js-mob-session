@@ -1,5 +1,4 @@
-'use client'
-import { searchFilter } from '@/sharedUtil/searchFilter'
+import SearchField from '@/components/searchField'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -28,14 +27,7 @@ export default function RootLayout({
           </nav>
           <main className='flex-grow h-screen'>
             <header className='bg-blue-300 h-20'>
-              <label htmlFor='search-bar' className="block">
-                <span className="block text-sm font-medium text-slate-700">Search</span>
-                <input 
-                  onChange={searchFilter}
-                  type='text' id='search-bar'
-                  placeholder='input search query here' 
-                  className="border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"/>
-              </label>
+              <SearchField/>
             </header>
             {children}
           </main>
