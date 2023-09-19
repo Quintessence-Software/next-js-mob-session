@@ -1,13 +1,18 @@
-'use client';
-import { readJsonFile } from '@/sharedUtil/fileReader';
-import { useEffect, useState } from 'react';
+"use client"
+
+import { useEffect, useState, useContext } from 'react';
+import { GlobalContext } from '@/context/GlobalContext';
+
 
 export default function Dashboard () {
     const [dataCollection,setDataCollection] = useState([{}]);
+    const searchTerm = useContext(GlobalContext);
 
     useEffect(()=>{
-        setDataCollection(readJsonFile())
-    })
+        fetch('http://localhost:3000/api/stocks').then(
+            async (response) => setDataCollection(JSON.parse(await response.json()))
+        );
+    }, []);
 
     return (
         <>

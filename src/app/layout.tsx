@@ -1,8 +1,11 @@
+'use client'
+
 import SearchField from '@/components/searchField'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
+import { GlobalContext } from '@/context/GlobalContext'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -25,12 +28,16 @@ export default function RootLayout({
             <Link href={'/'}>Home</Link>
             <Link href={'/dashboard'}>Go to dashboard</Link>
           </nav>
-          <main className='flex-grow h-screen'>
-            <header className='bg-blue-300 h-20'>
-              <SearchField/>
-            </header>
-            {children}
-          </main>
+          <GlobalContext.Provider value='Siziba'>
+              <main className='flex-grow h-screen'>
+                <header className='bg-blue-300 h-20'>
+                  <SearchField/>
+                </header>
+                  
+                      {children}
+                  
+              </main>
+          </GlobalContext.Provider>
         </div>
       </body>
     </html>
